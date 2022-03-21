@@ -1,5 +1,5 @@
 /*Andrew Wong
- * Mar.6.22
+ * Mar.21.22
  * Creates objects for 8 movies containing the name, genre, release date, and runtime in minutes
  * Objects are stored in an ArrayList and printed out
  * Movies with a runtime less than 120 minutes are removed and the new list is printed out
