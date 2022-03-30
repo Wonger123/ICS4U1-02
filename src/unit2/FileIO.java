@@ -12,12 +12,13 @@ public class FileIO {
 	public static void main(String[] args) {
 
 		File f = new File("words_alpha.txt");
+		String filename = "words_alpha.txt";
 		BufferedReader brFile = null;
 
 		try {
 			brFile = new BufferedReader(new FileReader(f));
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found");
+			System.out.printf("File \"%s\" not found. Exiting.", filename);
 			e.printStackTrace();
 			System.exit(0);
 		}
