@@ -1,3 +1,10 @@
+/* Andrew Wong
+ * April.3.22
+ * Creates a sorted deck of 52 cards
+ * Displays the sorted deck
+ * Shuffles the deck
+ * Displays the shuffled deck
+ */
 package unit3;
 
 import java.util.ArrayList;
@@ -15,7 +22,7 @@ public class ShufflingCards {
 			}
 		}
 
-		// displays sorted deck of cards
+		// displays the sorted deck of cards
 		for (int i = 0; i < deck.size(); i++) {
 			System.out.printf("%-4s", deck.get(i));
 			if (i % 13 == 12) {
@@ -50,15 +57,15 @@ class Card {
 	public int value;
 	public char suit;
 
-	public Card(int val, int sui) {
-		value = val;
-		if (sui == 1)
+	public Card(int cardValue, int cardSuit) {
+		value = cardValue;
+		if (cardSuit == 1)
 			suit = 'H';
-		if (sui == 2)
+		if (cardSuit == 2)
 			suit = 'C';
-		if (sui == 3)
+		if (cardSuit == 3)
 			suit = 'D';
-		if (sui == 4)
+		if (cardSuit == 4)
 			suit = 'S';
 	}
 
