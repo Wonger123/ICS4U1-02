@@ -4,34 +4,93 @@ public class ElevTest {
 
 	public static void main(String[] args) {
 		
-		Elevator south = new Elevator(1, 0, true, 0, 0);
-		Elevator east = new Elevator(1, 0, true, 0, 0);
-	
-		System.out.println("Have 10 people get on south at the ground floor");
+		Elevator south = new Elevator(1, 0);
+		Elevator east = new Elevator(5, 0);
 		
-		System.out.println("3 get out on floor 4 and the rest get out on the top floor");
+		System.out.println("1. Have 10 people get on south at the ground floor");
+		south.openDoors();
+		south.addPeople(10);
+		System.out.println(south);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 		
-		System.out.println("Have 8 get into east on the 5th floor");
-
-		System.out.println("Try and add 30 more on the 8th floor");
-
-		System.out.println("Try to go above the top floor");
-
-		System.out.println("Try to go to a negative floor");
-
-		System.out.println("Move both elevators to the second floor");
-
-		System.out.println("Open the doors on east");
-
-		System.out.println("Have a power failure");
+		System.out.println("2. 3 get out on floor 4 and the rest get out on the top floor");
+		south.closeDoors();
+		south.goToFloor(4);
+		south.openDoors();
+		south.removePeople(3);
+		System.out.println(south + "\n");
 		
-		System.out.println("Then test to make sure that your elevators can't move or close or open doors");
+		south.closeDoors();
+		south.goToFloor(19);
+		south.openDoors();
+		south.removePeople(7);
+		System.out.println(south);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 		
-		System.out.println("Restore the power (you should see a message)");
+		System.out.println("3. Have 8 get into east on the 5th floor");
+		east.openDoors();
+		east.addPeople(8);
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-		System.out.println("Restore the power again (no message, the power is already on)");
+		System.out.println("4. Try and add 30 more on the 8th floor");
+		east.closeDoors();
+		east.goToFloor(8);
+		east.openDoors();
+		east.addPeople(30);
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-		System.out.println("Make elevator south move up one floor at a time from the ground floor to floor 10, stopping on each floor and opening and closing doors");
+		System.out.println("5. Try to go above the top floor");
+		east.closeDoors();
+		east.goToFloor(20);
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		
+		System.out.println("6. Try to go to a negative floor");
+		east.goToFloor(-1);
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
+		System.out.println("7. Move both elevators to the second floor");
+		south.closeDoors();
+		south.goToFloor(2);
+		east.goToFloor(2);
+		System.out.println(south + "\n");
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+		System.out.println("8. Open the doors on east");
+		east.openDoors();
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+		System.out.println("9. Have a power failure");
+		Elevator.setPowerState(false);
+		System.out.println(Elevator.getPowerState());
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+		
+		System.out.println("10. Then test to make sure that your elevators can't move or close or open doors");
+		south.openDoors();
+		south.closeDoors();
+		south.up();
+		System.out.println(south + "\n");
+		east.openDoors();
+		east.closeDoors();
+		east.up();
+		System.out.println(east);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+		/*System.out.println("11. Restore the power (you should see a message)");
+		Elevator.setPowerState(true);
+		System.out.println(Elevator.getPowerState());
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+		System.out.println("12. Restore the power again (no message, the power is already on)");
+		Elevator.setPowerState(true);
+		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
+
+		System.out.println("13. Make elevator south move up one floor at a time from the ground floor to floor 10, stopping on each floor and opening and closing doors");
+		*/
 	}
 }

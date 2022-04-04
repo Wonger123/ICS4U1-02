@@ -3,129 +3,166 @@ package unit3;
 public class Elevator {
 
 	// class level variables
-	static String manufacturer = "Otis";
-	static int topFloor = 19;
-	static int maxOccupants = 25;
+	static final String MANUFACTURER = "Otis";
+	static final int TOP_FLOOR = 19;
+	static final int MAX_OCCUPANTS = 25;
 	static boolean powerOn = true;
 
 	// object level variables
-	int floor = 1;
-	int people = 0;
-	boolean doorsOpen = false;
-	int peopleAdded, peopleRemoved;
+	private int floor = 1;
+	private int people = 0;
+	private boolean doorsOpen = false;
 
 	// constructor
-	Elevator(int elevFloor, int elevPeople, boolean elevDoorsOpen, int elevPeopleAdded, int elevPeopleRemoved) {
+	Elevator(int elevFloor, int elevPeople) {
 		floor = elevFloor;
 		people = elevPeople;
-		doorsOpen = elevDoorsOpen;
-		peopleAdded = elevPeopleAdded;
-		peopleRemoved = elevPeopleRemoved;
 	}
 
-	static void setPowerState() {
-		powerOn = true;
+	public static void setPowerState(boolean powerOn) {
+		Elevator.powerOn = powerOn;
+	}
+	
+	static boolean getPowerState() {	
+		return powerOn;
 	}
 
 	// instance methods
 	void up() {
-		if (powerOn = false) {
-			System.out.println("Power not on. Turn power on before using the elevator.");
-		}
-		if (doorsOpen = true) {
-			System.out.println("Please close the doors before using the elevator");
-		}
-		if (floor < 1 || floor > 19) {
-			if (floor < 1) System.out.println("Cannot go lower than floor 1.");
-			if (floor > 19) System.out.println("Max floor is 19.");
+		// power is on, doors are closed, don't go above top floor
+		if (Elevator.powerOn) {
+			if (!doorsOpen) {
+				if (floor < TOP_FLOOR) {
+					floor++;
+				}
+				else {
+					System.out.println("The elevator is already at the top floor.");
+				}
+			}
+			else {
+				System.out.println("The elevator doors must be closed first.");
+			}
 		}
 		else {
-			floor++;
+			System.out.println("The power must be on to use the elevator.");
 		}
 	}
 
 	void down() {
-		if (powerOn = false) {
-			System.out.println("Power not on. Turn power on before using the elevator.");
-		}
-		if (doorsOpen = true) {
-			System.out.println("Please close the doors before using the elevator");
-		}
-		if (floor < 1 || floor > 19) {
-			if (floor < 1) System.out.println("Cannot go lower than floor 1.");
-			if (floor > 19) System.out.println("Max floor is 19.");
+		// power is on, doors are closed, don't go below bottom floor
+		if (Elevator.powerOn) {
+			if (!doorsOpen) {
+				if (floor > 0) {
+					floor++;
+				}
+				else {
+					System.out.println("The elevator is already at the lowest floor.");
+				}
+			}
+			else {
+				System.out.println("The elevator doors must be closed first.");
+			}
 		}
 		else {
-			floor--;
+			System.out.println("The power must be on to use the elevator.");
 		}
 	}
 
 	void goToFloor(int n) {
-		if (powerOn = false) {
-			System.out.println("Power not on. Turn power on before using the elevator.");
-		}
-		if (doorsOpen = true) {
-			System.out.println("Please close the doors before using the elevator");
-		}
-		if (floor < 1 || floor > 19) {
-			if (floor < 1) System.out.println("Cannot go lower than floor 1.");
-			if (floor > 19) System.out.println("Max floor is 19.");
+		// power is on, doors are closed, don't go above top floor or below bottom floor
+		if (Elevator.powerOn) {
+			if (!doorsOpen) {
+				if (n >= 1 && n <= TOP_FLOOR) {
+					floor = n;
+				}
+				else {
+					System.out.println("You cannot go to that floor.");
+				}
+			}
+			else {
+				System.out.println("The elevator doors must be closed first.");
+			}
 		}
 		else {
-			floor = n;
+			System.out.println("The power must be on to use the elevator.");
 		}
 	}
 	
 	void openDoors() {
-		if (powerOn = false) {
-			System.out.println("Power not on. Turn power on before opening the doors.");
+		// power is on
+		if (Elevator.powerOn) {
+			if (!doorsOpen) {
+				doorsOpen = true;
+			}
+			else {
+				System.out.println("Elevator doors are already open.");
+			}
 		}
 		else {
-			doorsOpen = true;
+			System.out.println("Power must be on to open doors.");
 		}
 	}
 	
 	void closeDoors() {
-		if (powerOn = false) {
-			System.out.println("Power not on. Turn power on before closing the doors.");
+		// power is on
+		if (Elevator.powerOn) {
+			if (doorsOpen) {
+				doorsOpen = false;
+			}
+			else {
+				System.out.println("Elevator doors are already closed.");
+			}
 		}
 		else {
-			doorsOpen = false;
+			System.out.println("Power must be on to close doors.");
 		}
 	}
 	
 	void addPeople(int peopleAdded) {
-		if (doorsOpen = false) {
-			System.out.println("Please open doors to enter the elevator.");
-		}
-		if (people > maxOccupants) {
-			System.out.println("Elevator is currently full.");
-		}
-		if (floor < 1) {
-			System.out.println("Elevator cannot be underground");
+		// doors are open, don't go above max occupancy, peopleAdded is positive
+		if (doorsOpen) {
+			if (peopleAdded > 0) {
+				if (people + peopleAdded < MAX_OCCUPANTS) {
+					people += peopleAdded;
+				}
+				else {
+					int peopleRemaining = (people + peopleAdded) - MAX_OCCUPANTS;
+					people = MAX_OCCUPANTS;
+					System.out.println("Elevator full, " + peopleRemaining + " people could not get on the elevator.");
+				}
+			}
+			else {
+				System.out.println("You cannot add negative people.");
+			}
 		}
 		else {
-			people = people + peopleAdded;
+			System.out.println("The elevator doors must be opened first.");
 		}
 	}
 	
 	void removePeople(int peopleRemoved) {
-		if (doorsOpen = false) {
-			System.out.println("Please open doors to enter the elevator.");
-		}
-		if (people > maxOccupants) {
-			System.out.println("Elevator is currently full.");
-		}
-		if (floor < 1) {
-			System.out.println("Elevator cannot be underground");
+		// doors are open, don't go below 0, peopleRemoved is positive
+		if (doorsOpen) {
+			if (peopleRemoved > 0) {
+				if (people - peopleRemoved >= 0) {
+					people -= peopleRemoved;
+				}
+				else {
+					System.out.println("You cannot remove more than the current number of people in the elevator.");
+				}
+			}
+			else {
+				System.out.println("You cannot remove negative people.");
+			}
 		}
 		else {
-			people = people - peopleAdded;
+			System.out.println("The elevator doors must be opened first.");
 		}
 	}
 	
+	@Override
 	public String toString() {
-		String s = String.format("Current floor: %d%nCurrent capacity: %d%nDoors open: %s", floor, people, doorsOpen);
+		String s = String.format("Current floor: %d%nPower On: %b%nCurrent capacity: %d%nDoors open: %s", floor, powerOn, people, doorsOpen);
 		return s;
 	}
 }
