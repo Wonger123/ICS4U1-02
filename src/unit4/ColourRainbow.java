@@ -1,9 +1,4 @@
-package unit4;
-
-import java.awt.Color;
-
-/**
- * Usage:
+/* Usage:
  * 
  * You do not need to ever make a ColourRainbow object since all of the methods
  * and variables are static.
@@ -13,7 +8,10 @@ import java.awt.Color;
  * 
  * You can change the parameter "stepSize" to change how fast the colours
  * change.
- **/
+ */
+package unit4;
+
+import java.awt.Color;
 
 public class ColourRainbow {
 
