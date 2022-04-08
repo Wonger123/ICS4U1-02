@@ -1,3 +1,10 @@
+/* Andrew Wong
+ * Apr.7.22
+ * 
+ * This class contains all the information for controlling the elevators
+ * and about the elevators. All the controls of the elevator use their own
+ * separate method.
+ */
 package unit3;
 
 public class Elevator {

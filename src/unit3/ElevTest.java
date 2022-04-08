@@ -1,3 +1,9 @@
+/* Andrew Wong
+ * Apr.7.22
+ * 
+ * This is the Main class which calls upon specific methods in the
+ * Elevator.java file.
+ */
 package unit3;
 
 public class ElevTest {
