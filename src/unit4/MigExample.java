@@ -39,7 +39,7 @@ public class MigExample {
 		p.add(new JLabel("Name:"), "align right");
 		p.add(new JTextField("Full name", 30),"span 2, wrap");
 		// phone
-		p.add(new JLabel("Cell phone:"),"align right");
+		p.add(new JLabel("Cell phone:"), "align right");
 		p.add(new JTextField( 10),"");
 		
 		p.add(new JLabel("Extra Curricular"), "skip 1");
