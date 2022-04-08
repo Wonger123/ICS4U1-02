@@ -9,22 +9,28 @@ public class Elevator {
 	static boolean powerOn = true;
 
 	// object level variables
+	private String name;
 	private int floor = 1;
 	private int people = 0;
 	private boolean doorsOpen = false;
 
 	// constructor
-	Elevator(int elevFloor, int elevPeople) {
+	Elevator(int elevFloor, int elevPeople, String elevName) {
 		floor = elevFloor;
 		people = elevPeople;
+		name = elevName;
 	}
 
 	public static void setPowerState(boolean powerOn) {
+		if (!Elevator.powerOn) {
+			System.out.println("Power is on.");
+		}
 		Elevator.powerOn = powerOn;
+
 	}
 	
 	static boolean getPowerState() {	
-		return powerOn;
+		return Elevator.powerOn;
 	}
 
 	// instance methods
@@ -162,7 +168,7 @@ public class Elevator {
 	
 	@Override
 	public String toString() {
-		String s = String.format("Current floor: %d%nPower On: %b%nCurrent capacity: %d%nDoors open: %s", floor, powerOn, people, doorsOpen);
+		String s = String.format("Elevtor: %s%nCurrent Floor: %d%nPower On: %b%nCurrent Capacity: %d%nDoors Open: %s", name, floor, powerOn, people, doorsOpen);
 		return s;
 	}
 }

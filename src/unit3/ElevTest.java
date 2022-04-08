@@ -4,8 +4,8 @@ public class ElevTest {
 
 	public static void main(String[] args) {
 		
-		Elevator south = new Elevator(1, 0);
-		Elevator east = new Elevator(5, 0);
+		Elevator south = new Elevator(1, 0, "South");
+		Elevator east = new Elevator(5, 0, "East");
 		
 		System.out.println("1. Have 10 people get on south at the ground floor");
 		south.openDoors();
@@ -81,16 +81,23 @@ public class ElevTest {
 		System.out.println(east);
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
-		/*System.out.println("11. Restore the power (you should see a message)");
+		System.out.println("11. Restore the power (you should see a message)");
 		Elevator.setPowerState(true);
-		System.out.println(Elevator.getPowerState());
+		System.out.println("Power On: " + Elevator.getPowerState());
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
 		System.out.println("12. Restore the power again (no message, the power is already on)");
 		Elevator.setPowerState(true);
+		System.out.println("Power On: " + Elevator.getPowerState());
 		System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------");
 
 		System.out.println("13. Make elevator south move up one floor at a time from the ground floor to floor 10, stopping on each floor and opening and closing doors");
-		*/
+		south.goToFloor(1);
+		for (int i = 0; i < 10; i++) {
+			south.openDoors();
+			south.closeDoors();
+			System.out.println(south + "\n");
+			south.up();
+		}
 	}
 }
