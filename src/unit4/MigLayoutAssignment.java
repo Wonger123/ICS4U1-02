@@ -17,7 +17,7 @@ public class MigLayoutAssignment extends JFrame {
 
 	public static void main(String[] args) {
 
-		new MigLayoutAssignment();j
+		new MigLayoutAssignment();
 	}
 
 	MigLayoutAssignment() {
