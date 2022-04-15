@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -51,11 +52,12 @@ public class MigLayoutAssignment extends JFrame {
 		radioSize.setBackground(Color.LIGHT_GRAY);
 		radioSize.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Size",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		JRadioButton small = new JRadioButton("Small");
-		JRadioButton medium = new JRadioButton("Medium");
-		JRadioButton large = new JRadioButton("Large");
+		radioSize.setBackground(Color.LIGHT_GRAY);
+		JRadioButton small = new RadioButtonColor("Small");
+		JRadioButton medium = new RadioButtonColor("Medium");
+		JRadioButton large = new RadioButtonColor("Large");
 
-		small.setSelected(true);
+		small.setSelected(false);
 
 		ButtonGroup sizeButtonGroup = new ButtonGroup();
 
@@ -73,10 +75,11 @@ public class MigLayoutAssignment extends JFrame {
 		JPanel radioStyle = new JPanel(new GridLayout(2, 1));
 		radioStyle.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Style",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		JRadioButton thin = new JRadioButton("Thin");
-		JRadioButton thick = new JRadioButton("Thick");
+		radioStyle.setBackground(Color.LIGHT_GRAY);
+		JRadioButton thin = new RadioButtonColor("Thin");
+		JRadioButton thick = new RadioButtonColor("Thick");
 
-		thin.setSelected(true);
+		thin.setSelected(false);
 
 		ButtonGroup styleButtonGroup = new ButtonGroup();
 
@@ -88,38 +91,57 @@ public class MigLayoutAssignment extends JFrame {
 
 		p.add(radioStyle, "align center, top");
 
-		// toppings radio buttons
-		JPanel radioToppings = new JPanel(new GridLayout(5, 1));
-		radioToppings.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Toppings",
+		// toppings checkbox
+		JPanel toppings = new JPanel(new GridLayout(5, 1));
+		toppings.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Toppings",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		JRadioButton pepperoni = new JRadioButton("Pepperoni");
-		JRadioButton mushrooms = new JRadioButton("Mushrooms");
-		JRadioButton olives = new JRadioButton("Olives");
-		JRadioButton bacon = new JRadioButton("Bacon");
-		JRadioButton peppers = new JRadioButton("Peppers");
+		toppings.setBackground(Color.LIGHT_GRAY);
+		JCheckBox pepperoni = new CheckBoxColor("Pepperoni");
+		JCheckBox mushrooms = new CheckBoxColor("Mushrooms");
+		JCheckBox olives = new CheckBoxColor("Olives");
+		JCheckBox bacon = new CheckBoxColor("Bacon");
+		JCheckBox peppers = new CheckBoxColor("Peppers");
 
-		pepperoni.setSelected(true);
+		toppings.add(pepperoni);
+		toppings.add(mushrooms);
+		toppings.add(olives);
+		toppings.add(bacon);
+		toppings.add(peppers);
 
-		ButtonGroup toppingsButtonGroup = new ButtonGroup();
-
-		toppingsButtonGroup.add(pepperoni);
-		toppingsButtonGroup.add(mushrooms);
-		toppingsButtonGroup.add(olives);
-		toppingsButtonGroup.add(bacon);
-		toppingsButtonGroup.add(peppers);
-
-		radioToppings.add(pepperoni);
-		radioToppings.add(mushrooms);
-		radioToppings.add(olives);
-		radioToppings.add(bacon);
-		radioToppings.add(peppers);
-
-		p.add(radioToppings, "align center, top");
+		p.add(toppings, "align center, top");
 
 		JButton btn1 = new JButton("Ok");
 		JButton btn2 = new JButton("Close");
 
 		p.add(btn1, "skip 2, align right, split 2");
 		p.add(btn2, "align right");
+	}
+
+	/*void radioSize() {
+
+	}
+
+	void radioStyle() {
+
+	}
+
+	void radioToppings() {
+
+	}*/
+	
+	class CheckBoxColor extends JCheckBox {
+		CheckBoxColor(String text) {
+			super(text);
+			
+			this.setBackground(Color.LIGHT_GRAY);
+		}
+	}
+	
+	class RadioButtonColor extends JRadioButton {
+		RadioButtonColor(String text) {
+			super(text);
+			
+			this.setBackground(Color.LIGHT_GRAY);
+		}
 	}
 }

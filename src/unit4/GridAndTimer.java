@@ -22,7 +22,7 @@ public class GridAndTimer {
 	
 	JPanel panel;
 	Timer timer;
-	int timerSpeed = 1_500_000; // ms
+	int timerSpeed = 500; // ms
 	
 	GridAndTimer() {
 		JFrame window = new JFrame("Testing Grid Layout");
