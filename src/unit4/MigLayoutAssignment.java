@@ -27,7 +27,7 @@ public class MigLayoutAssignment extends JFrame {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setLocationRelativeTo(null);
 
-		JPanel panel = new JPanel(new MigLayout("wrap 3, gapy 20, insets 10, debug")); // turn debug off later
+		JPanel panel = new JPanel(new MigLayout("wrap 3, gapy 20, insets 10")); // turn debug off later
 
 		setupGUI1(panel);
 
@@ -52,7 +52,6 @@ public class MigLayoutAssignment extends JFrame {
 		radioSize.setBackground(Color.LIGHT_GRAY);
 		radioSize.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Size",
 				TitledBorder.LEFT, TitledBorder.TOP));
-		radioSize.setBackground(Color.LIGHT_GRAY);
 		JRadioButton small = new RadioButtonColor("Small");
 		JRadioButton medium = new RadioButtonColor("Medium");
 		JRadioButton large = new RadioButtonColor("Large");
