@@ -164,9 +164,10 @@ public class EventsAssignment {
 			window3 = new JFrame("About");
 			window3.setSize(500, 200);
 
+			char ch = '"';
 			panel = new JPanel();
 			label1 = new JLabel("To change the background color to a random color,");
-			label2 = new JLabel("simply press the 'Random Color!' button.");
+			label2 = new JLabel("simply press the " + ch + "Random Color!" + ch + " button.");
 			panel.add(label1);
 			panel.add(label2);
 			btn1 = new JButton("Close");
