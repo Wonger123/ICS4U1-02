@@ -18,7 +18,7 @@ public class ColourRainbow {
 	private static int red = 255, green = 0, blue = 0;
 	static int stepSize = 5;
 
-	static Color getNextColour() {
+	public static Color getNextColour() {
 
 		Color newColour = new Color(red, green % 256, blue);
 		// Red to orange to yellow to green
