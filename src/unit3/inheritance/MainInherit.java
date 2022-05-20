@@ -1,4 +1,4 @@
-package unit4.inheritance;
+package unit3.inheritance;
 
 public class MainInherit {
 

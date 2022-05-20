@@ -1,4 +1,4 @@
-package unit4.inheritance;
+package unit3.inheritance;
 
 class Child extends Parent {
 	//int height = 25; //this is SHADOWING the parent variable
