@@ -1,4 +1,4 @@
-package unit4;
+package unit4.graphing;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -45,7 +45,6 @@ public class PixelGraphics {
 					double gg = (Math.cos((y) * Math.PI/180) + Math.sin((x) * Math.PI/180)) * 255;
 					double bb = (Math.cos(x * Math.PI/180) + Math.sin(y * Math.PI/180)) * 255;
 					Color c = new Color((int)(Math.abs(rr))%256, (int)(Math.abs(gg))%256, (int)(Math.abs(bb))%256);
-
 
 					g.setColor(c);
 					g.fillRect(x, y, 1, 1);

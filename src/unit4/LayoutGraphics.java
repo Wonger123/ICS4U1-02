@@ -49,7 +49,7 @@ public class LayoutGraphics extends JFrame {
 		//4 rows, 2 cols, 10 pixel gaps between buttons
 		panelB.setLayout(new GridLayout( 4,2, 10,10));
 		for (int i=0; i < 8; i++) {
-			panelB.add(new JButton("A button"));
+			panelB.add(new JButton("Button " + i));
 		}
 		
 		this.add(panelB, BorderLayout.EAST);

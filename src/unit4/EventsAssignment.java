@@ -40,7 +40,7 @@ public class EventsAssignment {
 	JMenuItem menuItem1, menuItem2;
 	JCheckBox checkBox;
 	Timer timer;
-	int timerSpeed = 500;
+	int timerSpeed = 1;
 
 	EventsAssignment() {
 		// setup window1

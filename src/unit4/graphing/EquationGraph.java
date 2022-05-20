@@ -1,4 +1,4 @@
-package unit4;
+package unit4.graphing;
 
 import javax.swing.*;
 import java.awt.*;
