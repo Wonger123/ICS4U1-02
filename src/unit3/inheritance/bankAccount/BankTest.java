@@ -1,4 +1,4 @@
-package unit3.bankAccount;
+package unit3.inheritance.bankAccount;
 
 /* Instructions:
 Make a BankAccount class and everything else needed to get the output provided from a BankTest program like the one below.

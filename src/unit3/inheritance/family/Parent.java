@@ -1,4 +1,4 @@
-package unit3.inheritance;
+package unit3.inheritance.family;
 
 class Parent extends Ancestor {
 
