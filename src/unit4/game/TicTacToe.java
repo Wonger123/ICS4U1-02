@@ -161,7 +161,7 @@ public class TicTacToe {
 			g2.setStroke(new BasicStroke(3));
 			for (int row = 0; row < SIZE; row++) {
 				for (int col = 0; col < SIZE; col++) {
-					if (board[row][col] == OO) {
+					if (board[row][col] == OO) {	
 						g.drawOval(col * boxW + sp, row * boxH + sp, boxW - 2 * sp, boxH - 2 * sp);
 					}
 					if (board[row][col] == XX) {
