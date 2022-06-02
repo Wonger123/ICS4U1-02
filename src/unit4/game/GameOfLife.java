@@ -5,9 +5,25 @@
  */
 package unit4.game;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class GameOfLife {
 
@@ -21,7 +37,6 @@ public class GameOfLife {
 	JButton playPause, clearBoard;
 	JLabel genNum;
 
-	int tileCounter = 0; // maybe???
 	int genCounter = 0;
 	boolean simActive = false;
 
@@ -29,7 +44,7 @@ public class GameOfLife {
 	static int winW;
 	static int winH;
 
-	final static int SIZE = 40;
+	final static int SIZE = 100;
 	final int CELLSIZE;
 	final static int ALIVE = 1;
 	final static int DEAD = 0;
@@ -37,7 +52,7 @@ public class GameOfLife {
 	int[][] board = new int[SIZE][SIZE];
 
 	Timer timer;
-	int timerSpeed = 100;
+	int timerSpeed = 150;
 
 	GameOfLife() {
 		int h = (int) screenSize.getHeight();
@@ -109,7 +124,7 @@ public class GameOfLife {
 	private class DrawingPanel extends JPanel implements MouseListener {
 
 		private int panW, panH; // size of panel
-		private int sp = 2;
+		private int sp = 1;
 
 		DrawingPanel() {
 			this.setBackground(Color.LIGHT_GRAY);
@@ -132,7 +147,6 @@ public class GameOfLife {
 
 			// fill cell
 			g.setColor(Color.BLUE);
-			g2.setStroke(new BasicStroke(3));
 			for (int row = 0; row < SIZE; row++) {
 				for (int col = 0; col < SIZE; col++) {
 					if (board[row][col] == ALIVE) {
@@ -155,14 +169,14 @@ public class GameOfLife {
 				int row = y / CELLSIZE;
 				int col = x / CELLSIZE;
 
-				// 1. If the square is not DEAD then return
-				if (board[row][col] != 0)
-					return;
+				// fill/remove cell
+				if (board[row][col] == DEAD) {
+					board[row][col] = ALIVE;
+				} else {
+					board[row][col] = DEAD;
+				}
 
-				// 2. Fill cell
-				board[row][col] = ALIVE;
-
-				drPanel.repaint(); // don't forget this
+				drPanel.repaint();
 				txtPanel.repaint();
 			}
 		}
@@ -188,19 +202,21 @@ public class GameOfLife {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("Play")) {
+			if (e.getActionCommand().equals("Play")) {			// start sim
 				playPause.setText("Pause");
 				timer.start();
 				simActive = true;
 			}
-			if (e.getActionCommand().equals("Pause")) {
+			if (e.getActionCommand().equals("Pause")) {			// pause sim
 				playPause.setText("Play");
 				timer.stop();
 				simActive = false;
 			}
-			if (e.getActionCommand().equals("Clear Board")) {
+			if (e.getActionCommand().equals("Clear Board")) {	// clear board
 				init();
 				playPause.setText("Play");
+				genCounter = 0;
+				genNum.setText("Generation: " + genCounter);
 				timer.stop();
 				simActive = false;
 
@@ -214,51 +230,135 @@ public class GameOfLife {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int aliveCount;
+			int aliveCount = 0;
+			int[][] boardCopy = new int[SIZE][SIZE];
 
-			// Loop through every cell
+			// loop through every cell
 			for (int i = 0; i < SIZE; i++) {
 				for (int j = 0; j < SIZE; j++) {
 					aliveCount = neighbourCheck(i, j);
 
 					if (board[i][j] == ALIVE) {
-						if (aliveCount < 2)
-							board[i][j] = DEAD;
-						if (aliveCount > 3)
-							board[i][j] = DEAD;
-						else
-							board[i][j] = ALIVE;
+						if (aliveCount < 2) 			// under-population
+							boardCopy[i][j] = DEAD;
+						else if (aliveCount > 3) 		// over-populatin
+							boardCopy[i][j] = DEAD;
+						else 							// remains alive
+							boardCopy[i][j] = ALIVE;
 					} else {
-						if (aliveCount == 3)
-							board[i][j] = ALIVE;
-						else
-							board[i][j] = DEAD;
+						if (aliveCount == 3) 			// birth
+							boardCopy[i][j] = ALIVE;
+						else 							// remains dead
+							boardCopy[i][j] = DEAD;
 					}
 				}
 			}
+			board = boardCopy;
 
 			genCounter++;
+			genNum.setText("Generation: " + genCounter);
 
 			txtPanel.repaint();
 			drPanel.repaint();
 		}
 
-		int neighbourCheck(int ci, int cj) {
-			int aliveCount = 0;
-			for (int i = ci - 1; i <= ci + 1; i++) {
-				for (int j = cj - 1; j <= cj + 1; j++) {
-					try {
-						if (board[i][j] == ALIVE)
-							aliveCount++;
-					} catch (ArrayIndexOutOfBoundsException e) {
-						continue;
+		public int neighbourCheck(int ci, int cj) {
+			int aCounter = 0;
+			// top edge
+			if (ci == 0 && cj != 0 && cj != SIZE - 1) {
+				for (int row = ci; row <= ci + 1; row++) {
+					for (int col = cj - 1; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
 					}
 				}
 			}
+			// bottom edge
+			if (ci == SIZE - 1 && cj != 0 && cj != SIZE - 1) {
+				for (int row = ci - 1; row <= ci; row++) {
+					for (int col = cj - 1; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// left edge
+			if (ci != 0 && ci != SIZE - 1 && cj == 0) {
+				for (int row = ci - 1; row <= ci + 1; row++) {
+					for (int col = cj; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// right edge
+			if (ci != 0 && ci != SIZE - 1 && cj == SIZE - 1) {
+				for (int row = ci - 1; row <= ci + 1; row++) {
+					for (int col = cj - 1; col <= cj; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// top-left corner
+			if (ci == 0 && cj == 0) {
+				for (int row = ci; row <= ci + 1; row++) {
+					for (int col = cj; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// top-right corner
+			if (ci == 0 && cj == SIZE - 1) {
+				for (int row = ci; row <= ci + 1; row++) {
+					for (int col = cj - 1; col <= cj; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// bottom-left corner
+			if (ci == SIZE - 1 && cj == 0) {
+				for (int row = ci - 1; row <= ci; row++) {
+					for (int col = cj; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// bottom-right corner
+			if (ci == SIZE - 1 && cj == SIZE - 1) {
+				for (int row = ci - 1; row <= ci; row++) {
+					for (int col = cj - 1; col <= cj; col++) {
+						if (board[row][col] == ALIVE) {
+							aCounter++;
+						}
+					}
+				}
+			}
+			// rest of the grid
+			if (ci > 0 && ci < SIZE - 1 && cj > 0 && cj < SIZE - 1) {
+				for (int row = ci - 1; row <= ci + 1; row++) {
+					for (int col = cj - 1; col <= cj + 1; col++) {
+						if (board[row][col] == ALIVE)
+							aCounter++;
+					}
+				}
+			}
+
+			// remove centre celL from count if it is alive
 			if (board[ci][cj] == ALIVE)
-				return aliveCount - 1;
-			else
-				return aliveCount;
+				aCounter--;
+						
+			return aCounter;
 		}
 	}
 }
