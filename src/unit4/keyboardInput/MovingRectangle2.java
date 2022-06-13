@@ -49,7 +49,7 @@ public class MovingRectangle2 implements ActionListener {
 			player.y += 5;
 		if (mainKL.isKeyDown('D') && player.x + player.width < panW)
 			player.x += 5;
-
+		
 		panel.repaint();
 	}
 
