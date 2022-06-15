@@ -30,7 +30,6 @@ public class underwaterFish {
 
 		frame.add(panel);
 		frame.setVisible(true);
-
 	}
 
 	static BufferedImage loadImage(String filename) {
